@@ -1,6 +1,6 @@
 {% extends 'mysite/base.html' %}
 {% block title %}
-TOPページ
+{{ article.title }}
 {% endblock title %}
 
 {% block content %}
@@ -20,6 +20,10 @@ TOPページ
                 </div>
                 <hr>
             </div>
+            <nav class="blog-pagination">
+                <a class="btn btn-outline-primary" href="/">TOPページへ</a>
+                <a class="btn btn-outline-primary" href="{% url 'blog_list' %}">ブログ記事一覧へ</a>
+            </nav>
         </div>
         <aside class="col-md-4">
             <div class="p-4 mb-3 bg-light rounded">

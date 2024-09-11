@@ -24,7 +24,7 @@ TOPページ
                         <a href="#">{{ article.author }}</a>
                     </p>
                     <div style="text-align: right;">   
-                        <a href="#" class="stretched-link">続きを読む</a>
+                        <a href="{% url 'article' article.pk %}" class="stretched-link">続きを読む</a>
                     </div>
                 </div>
                 <hr>
