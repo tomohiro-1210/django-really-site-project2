@@ -14,7 +14,8 @@
 <body>
     <div class="container">
         {% include 'snippets/header.html' %}
-        {% include 'snippets/top_post.html' %}
+        {% block top_content %}
+        {% endblock top_content %}
     </div>
     {% block content %}
     {% endblock %}

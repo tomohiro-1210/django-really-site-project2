@@ -3,37 +3,23 @@
 TOPページ
 {% endblock title %}
 
-
-{% block top_content %}
-{% include 'snippets/top_post.html' %}
-{% endblock top_content %}
-
 {% block content %}
  
 <main class="container">
     <div class="row">
         <div class="col-md-8">
             <h3 class="pb-4 font-italic border-bottom">
-                Django Lesson
+                {{ article.title }}
             </h3>
-            {% for article in articles %}
             <div class="blog-post">
                 <div class="px-4">
-                    <h2 class="blog-post-title">{{ article.title }}</h2>
-                    <p class="blog-post-meta mb-0">{{ article.create_at }} by 
+                    <p class="py-2">{{ article.text }}</p>
+                    <p class="blog-post-meta mb-0" style="text-align: right;">{{ article.create_at }} by 
                         <a href="#">{{ article.author }}</a>
                     </p>
-                    <div style="text-align: right;">   
-                        <a href="#" class="stretched-link">続きを読む</a>
-                    </div>
                 </div>
                 <hr>
             </div>
-            {% endfor %}
-            <nav class="blog-pagination">
-                <a class="btn btn-outline-primary" href="#">古い記事</a>
-                <a class="btn btn-outline-primary disabled" href="#">新しい記事</a>
-            </nav>
         </div>
         <aside class="col-md-4">
             <div class="p-4 mb-3 bg-light rounded">
