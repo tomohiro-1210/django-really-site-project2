@@ -9,3 +9,14 @@ def index(request):
     template = 'mysite\index.html'
     context = {'articles':articles}
     return render(request, template, context)
+
+# ログイン
+def login(request):
+    # テンプレートなど
+    template = "mysite/login.html"
+    context = {}
+    # フォームからデータを受け取る
+    if request.method == 'POST':
+        email = request.POST['email']
+        password = request.POST['password']
+    return render(request, template, context)
