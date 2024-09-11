@@ -18,7 +18,7 @@ def blog_list(request):
     # 記事データの読み込み
     articles = Article.objects.all()
     # ページャー
-    paginator = Paginator(articles, 2)
+    paginator = Paginator(articles, 5)
     page_num = request.GET.get('page')
     # テンプレートなどの設定
     template = 'blog/blog_list.html'
