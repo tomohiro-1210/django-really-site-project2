@@ -4,6 +4,8 @@ from django.contrib.auth.models import Group
 from .models import User
 from blog.models import Article
 
+from mysite.forms import UserCreationForm
+
 # Register your models here.
 # 管理画面のクラス、UserAdminをカスタマイズしたやつ
 class CustonUserAdmin(UserAdmin):
@@ -26,9 +28,16 @@ class CustonUserAdmin(UserAdmin):
     list_filter = ()
     ordering = ()
     filter_horizontal = ()
+    add_fieldsets = (
+        (None, {
+            'fields': ('email', 'password')
+        }),
+    )
+    
+    add_form = UserCreationForm
     
 # 管理画面の表示
-admin.site.register(User)
+admin.site.register(User, CustonUserAdmin)
 admin.site.register(Article)
 
 # 管理画面の非表示

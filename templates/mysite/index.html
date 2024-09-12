@@ -24,15 +24,15 @@ TOPページ
                         <a href="#">{{ article.author }}</a>
                     </p>
                     <div style="text-align: right;">   
-                        <a href="{% url 'article' article.pk %}" class="stretched-link">続きを読む</a>
+                        <a href="{% url 'article' article.pk %}">続きを読む</a>
                     </div>
                 </div>
                 <hr>
             </div>
             {% endfor %}
             <nav class="blog-pagination">
-                <a class="btn btn-outline-primary" href="#">古い記事</a>
-                <a class="btn btn-outline-primary disabled" href="#">新しい記事</a>
+                <a class="btn btn-outline-primary" href="{% url 'blog_list' %}">ブログ一覧</a>
+                <a class="btn btn-outline-primary" href="{% url 'signup' %}">新規登録</a>
             </nav>
         </div>
         

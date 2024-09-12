@@ -4,6 +4,7 @@ from django.contrib.auth.views import LoginView
 from django.contrib.auth import logout
 from blog.models import Article
 from .forms import UserCreationForm
+from django.contrib import messages
 
 # Create your views here.
 def index(request):
@@ -34,13 +35,27 @@ def signup(request):
     context = {}
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
+        # ログイン処理が成功したとき
         if form.is_valid():
+            #　ログイン処理
             user = form.save(commit=False)
             user.save()
-            return redirect('login')
+            # メッセージ
+            messages.success(request, '登録が完了しました！ログインしてください。')
+            return redirect('/')
     return render(request, template, context)
 
 # ログインビュー
 class Login(LoginView):
     template_name = 'mysite/login.html'
+    
+    # ログインが成功した時の処理
+    def form_valid(self, form):
+        messages.success(self.request, 'ログイン完了！')
+        return super().form_valid(form)
+    
+    def form_invalid(self, form):
+        messages.error(self.request, 'ログインができませんでした。メールアドレスまたはパスワードが間違っています。')
+        return super().form_invalid(form)    
+    
     
