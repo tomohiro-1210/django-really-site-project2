@@ -23,7 +23,9 @@ TOPページ
                     <p class="blog-post-meta mb-0">{{ article.create_at }} by 
                         <a href="#">{{ article.author }}</a>
                     </p>
-                    <div style="text-align: right;">   
+                    <div style="text-align: right;"> 
+                        <!-- いいね -->
+                        {% include 'snippets/like_count.html' %}  
                         <a href="{% url 'article' article.pk %}">続きを読む</a>
                     </div>
                 </div>

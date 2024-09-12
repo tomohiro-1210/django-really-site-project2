@@ -15,6 +15,10 @@ def article(request, pk):
     
     # コメントの投稿
     if request.method == 'POST':
+        if request.POST.get('like_count', None):
+            article.count += 1
+            article.save()
+                        
         form = CommentForm(request.POST)
         if form.is_valid():
             keep_comment = form.save(commit=False)

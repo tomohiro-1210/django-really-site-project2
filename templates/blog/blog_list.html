@@ -19,6 +19,8 @@
                         <a href="#">{{ article.author }}</a>
                     </p>
                     <div style="text-align: right;">   
+                        <!-- いいね -->
+                        {% include 'snippets/like_count.html' %}
                         <a href="{% url 'article' article.pk %}" class="text-primary">続きを読む</a>
                     </div>
                 </div>
