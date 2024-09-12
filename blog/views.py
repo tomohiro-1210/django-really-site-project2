@@ -1,16 +1,33 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Article
+from .models import Article, Comment
 from django.core.paginator import Paginator
+from .forms import CommentForm
 
 # Create your views here.
 # 記事詳細
 def article(request, pk):
     # 記事の個別データ引っ張り出し
     article = Article.objects.get(pk=pk)
+    
+    # コメントの引っ張り出し
+    comments = Comment.objects.filter(article=article)
+    
+    # コメントの投稿
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            keep_comment = form.save(commit=False)
+            keep_comment.user = request.user # ログインしているユーザーの情報を引き渡し
+            keep_comment.article = article # 記事のデータを引き渡し
+            keep_comment.save()
+    
     # テンプレートページなどの読み込み
     template = 'blog/article.html'
-    context = {'article':article}
+    context = {
+        'article':article,
+        'comments':comments,
+        }
     return render(request, template, context)
 
 # 記事一覧
