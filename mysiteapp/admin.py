@@ -44,7 +44,6 @@ class CustonUserAdmin(UserAdmin):
     
 # 管理画面の表示
 admin.site.register(User, CustonUserAdmin)
-admin.site.register(Article)
 admin.site.register(Profile)
 
 # 管理画面の非表示

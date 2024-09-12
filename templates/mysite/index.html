@@ -25,7 +25,9 @@ TOPページ
                     </p>
                     <div style="text-align: right;"> 
                         <!-- いいね -->
-                        {% include 'snippets/like_count.html' %}  
+                        {% include 'snippets/like_count.html' %}
+                        <!-- タグ -->
+                        {% include 'snippets/tags.html' %}
                         <a href="{% url 'article' article.pk %}">続きを読む</a>
                     </div>
                 </div>

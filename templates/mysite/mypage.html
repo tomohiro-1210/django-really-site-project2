@@ -1,4 +1,7 @@
 {% extends 'mysite/base.html' %}
+{% block title %}
+マイページ
+{% endblock title %}
  
 {% block content %}
  
@@ -6,7 +9,7 @@
     <div class="row">
         <div class="col-md-8">
         <h3 class="pb-4 mb-4 font-italic border-bottom">
-            マイページ
+            {{ user.username }}マイページ
         </h3>
  
         <form class="row g-3" method="POST">

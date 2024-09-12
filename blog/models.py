@@ -2,6 +2,14 @@ from django.db import models
 from django.contrib.auth import get_user_model
 
 # Create your models here.
+# 記事のタグ
+class Tag(models.Model):
+    slug = models.CharField(primary_key=True, unique=True, max_length=20)
+    name = models.CharField(max_length=20)
+    
+    def __str__(self):
+        return self.slug
+
 # 記事のDBモデル
 class Article(models.Model):
     title = models.CharField(default="",blank=True, max_length=30)
@@ -10,6 +18,7 @@ class Article(models.Model):
     create_at = models.DateTimeField(auto_now_add=True) # auto_now_addは一度データが追加されたときに登録される
     update_at = models.DateTimeField(auto_now=True) # auto_nowは更新された時に登録・更新される
     count = models.IntegerField(default=0)
+    tags = models.ManyToManyField(Tag, blank=True)
     
 # コメントモデル
 class Comment(models.Model):

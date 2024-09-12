@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Article, Comment
+from .models import Article, Comment, Tag
 from django.core.paginator import Paginator
 from .forms import CommentForm
 
@@ -45,6 +45,23 @@ def blog_list(request):
     template = 'blog/blog_list.html'
     context = {
         'articles':articles,
+        'page_obj':paginator.get_page(page_num),
+        'page_num':page_num
+        }
+    return render(request, template, context)
+
+# タグ
+def blog_tags(request, slug):
+    # タグの取得
+    tags = Tag.objects.get(slug=slug)
+    tag_articles = tags.article_set.all()
+     # ページャー
+    paginator = Paginator(tag_articles, 5)
+    page_num = request.GET.get('page')
+    # テンプレートなどの設定
+    template = 'blog/tag_list.html'
+    context = {
+        'tags':tags,
         'page_obj':paginator.get_page(page_num),
         'page_num':page_num
         }
