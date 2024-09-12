@@ -1,2 +1,2 @@
-from account_models import *
-from profile_models import *
+from .account_models import User, UserManager
+from .profile_models import Profile
