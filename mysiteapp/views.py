@@ -3,8 +3,10 @@ from django.http import HttpResponse
 from blog.models import Article
 from .forms import ProfileForm
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 # マイページ
+@login_required
 def mypage(request):
     # テンプレートの読み込み
     template = "mysite/mypage.html"
