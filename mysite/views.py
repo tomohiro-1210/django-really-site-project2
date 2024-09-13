@@ -5,6 +5,8 @@ from django.contrib.auth import logout
 from blog.models import Article
 from .forms import UserCreationForm
 from django.contrib import messages
+import os
+from django.core.mail import send_mail
 
 # Create your views here.
 def index(request):
@@ -69,20 +71,24 @@ def contact(request):
     context = {}
     
     # メール送信
-    import os
-    from django.core.mail import send_mail
-    subject = '題名'
-    message = '本文です。テスト送信'
-    email_from = 'hoshitetsu.work@gmail.com'
-    email_to = [
-        'hoshitetsu.work@gmail.com',
-    ]
-    send_mail(
-        subject,
-        message,
-        email_from,
-        email_to
-    )
+    if request.method == 'POST':
+        # 自分への自動送信メール
+        subject = 'お問い合わせがありました'
+        message = """お問い合わせがありました。 \n名前: {}\nメールアドレス: {}\n内容: {}""" \
+        .format(request.POST.get('name'), request.POST.get('email'), request.POST.get('text'))
+        
+        email_from = 'hoshitetsu.work@gmail.com'
+        email_to = [
+            'hoshitetsu.work@gmail.com',
+            request.POST.get('email'),
+        ]
+        send_mail(
+            subject,
+            message,
+            email_from,
+            email_to
+        )
+        messages.success(request, 'お問い合わせいただきありがとうございます。')
     
     
     return render(request, template, context)
