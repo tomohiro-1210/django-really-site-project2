@@ -61,5 +61,29 @@ class Login(LoginView):
     def form_invalid(self, form):
         messages.error(self.request, 'ログインができませんでした。メールアドレスまたはパスワードが間違っています。')
         return super().form_invalid(form)    
+
+# お問い合わせフォーム
+def contact(request):
+    # テンプレートなどの読み込み
+    template = 'mysite/contact.html'
+    context = {}
     
+    # メール送信
+    import os
+    from django.core.mail import send_mail
+    subject = '題名'
+    message = '本文です。テスト送信'
+    email_from = 'hoshitetsu.work@gmail.com'
+    email_to = [
+        'hoshitetsu.work@gmail.com',
+    ]
+    send_mail(
+        subject,
+        message,
+        email_from,
+        email_to
+    )
+    
+    
+    return render(request, template, context)
     
