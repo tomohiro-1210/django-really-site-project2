@@ -1,12 +1,7 @@
 {% extends 'mysite/base.html' %}
 {% block title %}
-TOPページ
+ブログ記事一覧
 {% endblock title %}
-
-
-{% block top_content %}
-{% include 'snippets/top_post.html' %}
-{% endblock top_content %}
 
 {% block content %}
  
@@ -14,29 +9,32 @@ TOPページ
     <div class="row">
         <div class="col-md-8 mb-4 md:mb-0">
             <h3 class="pb-4 font-italic border-bottom">
-                Django Lesson
+                記事一覧
             </h3>
-            {% for article in articles %}
+            {% for article in page_obj %}
             <div class="blog-post">
                 <div class="px-4">
                     <h2 class="blog-post-title">{{ article.title }}</h2>
                     <p class="blog-post-meta mb-0">{{ article.create_at }} by 
                         <a href="#">{{ article.author }}</a>
                     </p>
-                    <div style="text-align: right;"> 
+                    <div style="text-align: right;">   
                         <!-- いいね -->
                         {% include 'snippets/like_count.html' %}
                         <!-- タグ -->
                         {% include 'snippets/tags.html' %}
-                        <a href="{% url 'article' article.pk %}">続きを読む</a>
+                        <a href="{% url 'article' article.pk %}" class="text-primary">続きを読む</a>
                     </div>
                 </div>
                 <hr>
             </div>
             {% endfor %}
+            <!-- ページャー -->
+            {% include 'snippets/pagination.html' %}
+            
+            <div class="p-2"></div>
             <nav class="blog-pagination">
-                <a class="btn btn-outline-primary" href="{% url 'blog_list' %}">ブログ一覧</a>
-                <a class="btn btn-outline-primary" href="{% url 'signup' %}">新規登録</a>
+                <a class="btn btn-outline-primary" href="/">TOPページへ</a>
             </nav>
         </div>
         
@@ -45,3 +43,4 @@ TOPページ
 </main>
  
 {% endblock %}
+

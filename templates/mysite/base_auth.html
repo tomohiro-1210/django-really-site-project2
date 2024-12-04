@@ -11,24 +11,10 @@
         <title>Really site {% block title %}{% endblock title %}</title>
 </head>
  
-<body>
-    <div class="container">
-        {% include 'snippets/header.html' %}
-        {% include 'snippets/messages.html' %}
-        {% block top_content %}
-        {% endblock top_content %}
-    </div>
+<body class="vh-100 d-flex align-items-center justify-content-center bg-light">
+ 
     {% block content %}
     {% endblock %}
-
-    {% include 'snippets\footer.html' %}
-
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
-        integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
-        crossorigin="anonymous"></script>
+    
 </body>
- 
 </html>

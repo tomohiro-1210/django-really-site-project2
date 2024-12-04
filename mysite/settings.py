@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,6 +27,20 @@ SECRET_KEY = 'django-insecure-em)nm9_7h9lzk4esf2*()%261=uec43@xikkyl!wc-al-!@iif
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
+import yaml
+
+if DEBUG:
+    # デバッグ環境でYAMLファイルを読み込む
+    with open(os.path.join(BASE_DIR, 'secrets', 'secret_dev.yaml'), encoding="utf-8") as file:
+        objs = yaml.safe_load(file)
+        
+        # objsのキーと値を環境変数にセット
+        for key, value in objs.items():
+            os.environ[key] = str(value)  # 値を文字列に変換して環境変数に設定
+else:
+    # 本番環境用の処理
+    pass
 
 
 # Application definition
@@ -131,3 +146,23 @@ LOGIN_REDIRECT_URL = '/'
 
 LOGOUT_URL = '/logout/'
 LOGOUT_REDIRECT_URL = '/login/'
+
+# --------- massage tab with bootstrap alert class ---------------------
+from django.contrib import messages
+MESSAGE_TAGS = {
+    messages.ERROR: 'rounded-0 alert alert-danger',
+    messages.WARNING: 'rounded-0 alert alert-warning',
+    messages.SUCCESS: 'rounded-0 alert alert-success',
+    messages.INFO: 'rounded-0 alert alert-info',
+    messages.DEBUG: 'rounded-0 alert alert-secondary',
+ }
+# --------- massage tab with bootstrap alert class ---------------------
+
+# Gmail送信設定
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
+EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']

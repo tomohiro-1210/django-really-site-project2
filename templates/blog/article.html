@@ -1,0 +1,41 @@
+{% extends 'mysite/base.html' %}
+{% block title %}
+{{ article.title }}
+{% endblock title %}
+
+{% block content %}
+ 
+<main class="container">
+    <div class="row">
+        <div class="col-md-8 mb-4 md:mb-0">
+            <!-- 記事本体 -->
+            <h3 class="pb-4 font-italic border-bottom">
+                {{ article.title }}
+            </h3>
+            <div class="blog-post">
+                <div class="px-4">
+                    <p class="py-2">{{ article.text }}</p>
+                    <p class="blog-post-meta mb-0" style="text-align: right;">{{ article.create_at }} by 
+                        <a href="#">{{ article.author }}</a>
+                    </p>
+                </div>
+                <hr>
+            </div>
+            <!-- いいね -->
+            {% include 'snippets/like_count.html' %}
+            <!-- タグ -->
+            {% include 'snippets/tags.html' %}
+            <!-- コメント -->
+            {% include 'snippets/comment.html' %}
+            <!-- リンク -->
+            <nav class="blog-pagination">
+                <a class="btn btn-outline-primary" href="/">TOPページへ</a>
+                <a class="btn btn-outline-primary" href="{% url 'blog_list' %}">ブログ記事一覧へ</a>
+            </nav>
+        </div>
+        
+        {% include 'snippets/sidebar.html' %}
+    </div>
+</main>
+ 
+{% endblock %}
